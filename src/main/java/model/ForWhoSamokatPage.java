@@ -1,21 +1,23 @@
 package model;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
 
 public class ForWhoSamokatPage {
     private WebDriver driver;
 
     // локатор для поля Имя
-    private By inputName = By.xpath(".//div[@id='root']/div/div[2]/div[2]/div[1]/input");
+    private By inputName = By.xpath(".//input[@placeholder='* Имя']");
     // локатор для поля Фамилия
-    private By inputSurname = By.xpath(".//div[@id='root']/div/div[2]/div[2]/div[2]/input");
+    private By inputSurname = By.xpath(".//input[@placeholder='* Фамилия']");
     // локатор для поля Адрес
-    private By inputAddress = By.xpath(".//div[@id='root']/div/div[2]/div[2]/div[3]/input");
+    private By inputAddress = By.xpath(".//input[@placeholder='* Адрес: куда привезти заказ']");
     // локатор для поля Станция метро
-    private By inputMetroStation = By.xpath(".//div[@id='root']/div/div[2]/div[2]/div[4]/div/div/input");
+    private By inputMetroStation = By.xpath(".//input[@placeholder='* Станция метро']");
+    // докатор для выбора станции метро из выпадающего списка
+    private By dropDownMetroStation = By.xpath(".//div[@class='select-search__select']");
     // локатор для поля Телефон
-    private By inputPhoneNumber = By.xpath("//*[@id='root']/div/div[2]/div[2]/div[5]/input");
+    private By inputPhoneNumber = By.xpath(".//input[@placeholder='* Телефон: на него позвонит курьер']");
 
     // локатор для кнопки Далее
     private By nextButton = By.xpath(".//button[@class='Button_Button__ra12g Button_Middle__1CSJM']");
@@ -40,7 +42,7 @@ public class ForWhoSamokatPage {
     // метод для заполнения поля Станция метро
     public void setMetroStation(String metroStation) {
         driver.findElement(inputMetroStation).sendKeys(metroStation);
-        driver.findElement(By.xpath(".//div[@class='select-search__select']")).click();
+        driver.findElement(dropDownMetroStation).click();
     }
     // метод для заполнения поля Телефон
     public void setPhoneNumber(String phoneNumber) {
@@ -61,4 +63,5 @@ public class ForWhoSamokatPage {
         setPhoneNumber(phoneNumber);
         clickNextButton();
     }
+
 }

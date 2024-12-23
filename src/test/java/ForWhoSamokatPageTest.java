@@ -5,14 +5,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import model.ForWhoSamokatPage;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -59,12 +54,10 @@ public class ForWhoSamokatPageTest {
         forWhoSamokatPage.inputAllFieldsAndGoNext(name, surname, address, metroStation, phoneNumber);
         forWhoSamokatPage.clickNextButton();
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // 10 секунд ожидания, пока не появится следующая страница
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//button[@class='Button_Button__ra12g Button_Middle__1CSJM Button_Inverted__3IF-i']")));
-
         RentAboutPage rentAboutPage = new RentAboutPage(driver);
         rentAboutPage.inputAllFieldsAndOrder("25.12.2024", "ЮЮЮЮЮЮЮХУ");
 
+        rentAboutPage.verifyPageHasStatusButton(); // Проверка наличия кнопки с помощью assert
     }
 
 

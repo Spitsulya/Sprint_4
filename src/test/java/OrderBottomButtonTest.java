@@ -11,7 +11,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import model.ForWhoSamokatPage;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.Collection;
@@ -65,8 +64,8 @@ public class OrderBottomButtonTest {
         RentAboutPage rentAboutPage = new RentAboutPage(driver);
         rentAboutPage.inputAllFieldsAndOrder("25.01.2025", "ЮЮЮЮЮЮЮХУ");
 
+        rentAboutPage.verifyPageHasStatusButton(); // Проверка наличия кнопки с помощью assert
     }
-
 
     @After
     public void tearDown() {

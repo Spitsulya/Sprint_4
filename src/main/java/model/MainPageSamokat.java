@@ -9,9 +9,11 @@ public class MainPageSamokat {
     private WebDriver driver;
 
     // локатор для кнопки заказать Сверху
-    private By orderButtonTop = By.xpath(".//div[@id='root']/div/div/div[1]/div[2]/button[1]");
+    private By orderButtonTop = By.xpath(".//button[@class='Button_Button__ra12g']");
     // локатор для кнопки заказать Снизу
-    private By orderButtonBottom = By.xpath(".//div[@id='root']/div/div/div[4]/div[2]/div[5]/button");
+    private By orderButtonBottom = By.xpath(".//button[@class='Button_Button__ra12g Button_Middle__1CSJM']");
+    // локатор для кнопки куки
+    private By cookieButton = By.xpath(".//button[@id='rcc-confirm-button']");
 
     // ЛОКАТОРЫ ВОПРОСОВ (1-8)
     public static final By COST_AND_HOW_TO_PAY_QUESTION_ABOUT = By.xpath(".//div[@id='accordion__heading-0']");
@@ -50,7 +52,7 @@ public class MainPageSamokat {
 
     // Закрывает куки
     public void closeCookie () {
-        driver.findElement(By.xpath(".//button[@id='rcc-confirm-button']")).click();
+        driver.findElement(cookieButton).click();
     }
     // Скроллит до конкретного вопроса из рубрики "Вопросы о важном"
     public void scrollToQuestions(By expectedQuestion) {
