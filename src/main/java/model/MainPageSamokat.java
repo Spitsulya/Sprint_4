@@ -2,7 +2,10 @@ package model;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import java.time.Duration;
+
 
 // КЛАСС ГЛАВНОЙ СТРАНИЦЫ САЙТА САМОКАТ
 public class MainPageSamokat {
@@ -64,7 +67,7 @@ public class MainPageSamokat {
     }
     // Находит каждый ответ
     public void getAnswerAbout(By expectedAnswer) {
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOfElementLocated(expectedAnswer));
         driver.findElement(expectedAnswer);
     }
     // Возвращает фактический текст ответа
