@@ -18,7 +18,6 @@ import java.util.Collection;
 @RunWith(Parameterized.class)
 public class OrderBottomButtonTest {
 
-    private static final String SAMOKAT_URL = "https://qa-scooter.praktikum-services.ru/";
     private WebDriver driver;
     private ForWhoSamokatPage forWhoSamokatPage;
 
@@ -38,8 +37,8 @@ public class OrderBottomButtonTest {
     @Before
     public void setUp() {
         driver = new ChromeDriver();
-        driver.get(SAMOKAT_URL);
         MainPageSamokat mainPageSamokat2 = new MainPageSamokat(driver);
+        mainPageSamokat2.openSamokatURL();
         mainPageSamokat2.сlickOrderButtonBottom();
         forWhoSamokatPage = new ForWhoSamokatPage(driver);
 

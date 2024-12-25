@@ -17,6 +17,8 @@ public class MainPageSamokat {
     private By orderButtonBottom = By.xpath(".//button[@class='Button_Button__ra12g Button_Middle__1CSJM']");
     // локатор для кнопки куки
     private By cookieButton = By.xpath(".//button[@id='rcc-confirm-button']");
+    // константа URL
+    private static final String SAMOKAT_URL = "https://qa-scooter.praktikum-services.ru/";
 
     // ЛОКАТОРЫ ВОПРОСОВ (1-8)
     public static final By COST_AND_HOW_TO_PAY_QUESTION_ABOUT = By.xpath(".//div[@id='accordion__heading-0']");
@@ -53,6 +55,10 @@ public class MainPageSamokat {
         this.driver = driver;
     }
 
+    // Открывает сайт Самокат
+    public void openSamokatURL() {
+        driver.get(SAMOKAT_URL);
+    }
     // Закрывает куки
     public void closeCookie () {
         driver.findElement(cookieButton).click();

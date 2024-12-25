@@ -17,7 +17,6 @@ public class MainPageSamokatTest {
     private final By expectedAnswer;
     private final String expectedAnswerText;
 
-    private static final String SAMOKAT_URL = "https://qa-scooter.praktikum-services.ru/";
     private WebDriver driver;
 
 public MainPageSamokatTest(By expectedQuestion, By expectedAnswer, String expectedAnswerText) {
@@ -42,9 +41,9 @@ public MainPageSamokatTest(By expectedQuestion, By expectedAnswer, String expect
     @Test
     public void testClickOnQuestionDisplaysCorrectAnswer() {
         driver = new ChromeDriver();
-        driver.get(SAMOKAT_URL); // переходим на страницу Самокат
 
         MainPageSamokat mainPageSamokat = new MainPageSamokat(driver);
+        mainPageSamokat.openSamokatURL(); // переходим на страницу Самокат
 
         mainPageSamokat.closeCookie(); // закрываем всплывающие куки
         mainPageSamokat.scrollToQuestions(expectedQuestion); // скроллим до нужного вопроса

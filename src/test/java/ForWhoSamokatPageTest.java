@@ -14,7 +14,6 @@ import java.util.Collection;
 @RunWith(Parameterized.class)
 public class ForWhoSamokatPageTest {
 
-    private static final String SAMOKAT_URL = "https://qa-scooter.praktikum-services.ru/";
     private WebDriver driver;
     private ForWhoSamokatPage forWhoSamokatPage;
 
@@ -30,12 +29,17 @@ public class ForWhoSamokatPageTest {
     public String metroStation;
     @Parameterized.Parameter(4)
     public String phoneNumber;
+    @Parameterized.Parameter(5)
+    public String dataWhen;
+    @Parameterized.Parameter(6)
+    public String comment;
+
 
     @Before
     public void setUp() {
         driver = new ChromeDriver();
-        driver.get(SAMOKAT_URL);
         MainPageSamokat mainPageSamokat2 = new MainPageSamokat(driver);
+        mainPageSamokat2.openSamokatURL();
         mainPageSamokat2.clickOrderButtonTop();
         forWhoSamokatPage = new ForWhoSamokatPage(driver);
 
@@ -44,8 +48,8 @@ public class ForWhoSamokatPageTest {
     @Parameterized.Parameters
     public static Collection<Object[]> loginFor() {
         return Arrays.asList(new Object[][]{
-                {"Элина", "Спицына", "г. Домодедово", "Арбатская", "+79854707022"},
-                {"Руслан", "Тимонин", "г. Домодедово", "Домодедовская", "+79852146729"}
+                {"Элина", "Спицына", "г. Домодедово", "Арбатская", "+79854707022", "25.12.2024", "ВАУ"},
+                {"Руслан", "Тимонин", "г. Домодедово", "Домодедовская", "+79852146729", "25.12.2024", "ВАУ"}
         });
     }
 
@@ -55,7 +59,7 @@ public class ForWhoSamokatPageTest {
         forWhoSamokatPage.clickNextButton();
 
         RentAboutPage rentAboutPage = new RentAboutPage(driver);
-        rentAboutPage.inputAllFieldsAndOrder("25.12.2024", "ЮЮЮЮЮЮЮХУ");
+        rentAboutPage.inputAllFieldsAndOrder(dataWhen, comment);
 
         rentAboutPage.verifyPageHasStatusButton(); // Проверка наличия кнопки с помощью assert
     }
