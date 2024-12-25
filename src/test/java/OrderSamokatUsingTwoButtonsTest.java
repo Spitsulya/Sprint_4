@@ -12,10 +12,11 @@ import java.util.Arrays;
 import java.util.Collection;
 
 @RunWith(Parameterized.class)
-public class ForWhoSamokatPageTest {
+public class OrderSamokatUsingTwoButtonsTest {
 
     private WebDriver driver;
     private ForWhoSamokatPage forWhoSamokatPage;
+    private MainPageSamokat mainPageSamokat;
 
 
     // Параметры для теста
@@ -34,14 +35,11 @@ public class ForWhoSamokatPageTest {
     @Parameterized.Parameter(6)
     public String comment;
 
-
     @Before
     public void setUp() {
         driver = new ChromeDriver();
-        MainPageSamokat mainPageSamokat2 = new MainPageSamokat(driver);
-        mainPageSamokat2.openSamokatURL();
-        mainPageSamokat2.clickOrderButtonTop();
-        forWhoSamokatPage = new ForWhoSamokatPage(driver);
+        mainPageSamokat = new MainPageSamokat(driver);
+        mainPageSamokat.openSamokatURL();
 
     }
 
@@ -54,7 +52,24 @@ public class ForWhoSamokatPageTest {
     }
 
     @Test
-    public void testFillOrderForm() {
+    // Оформление заказа с помощью нижней кнопки Заказать
+    public void testFillOrderForms1() {
+        mainPageSamokat.сlickOrderButtonBottom();
+        forWhoSamokatPage = new ForWhoSamokatPage(driver);
+        forWhoSamokatPage.inputAllFieldsAndGoNext(name, surname, address, metroStation, phoneNumber);
+        forWhoSamokatPage.clickNextButton();
+
+        RentAboutPage rentAboutPage = new RentAboutPage(driver);
+        rentAboutPage.inputAllFieldsAndOrder(dataWhen, comment);
+
+        rentAboutPage.verifyPageHasStatusButton(); // Проверка наличия кнопки с помощью assert
+    }
+
+    @Test
+    // Оформление заказа с помощью верхней кнопки Заказать
+    public void testFillOrderForms2() {
+        mainPageSamokat.clickOrderButtonTop();
+        forWhoSamokatPage = new ForWhoSamokatPage(driver);
         forWhoSamokatPage.inputAllFieldsAndGoNext(name, surname, address, metroStation, phoneNumber);
         forWhoSamokatPage.clickNextButton();
 
@@ -70,11 +85,3 @@ public class ForWhoSamokatPageTest {
         driver.quit();
     }
 }
-
-
-
-
-
-
-
-
