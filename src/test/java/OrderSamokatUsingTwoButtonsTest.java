@@ -11,12 +11,11 @@ import model.ForWhoSamokatPage;
 import java.util.Arrays;
 import java.util.Collection;
 
+
 @RunWith(Parameterized.class)
 public class OrderSamokatUsingTwoButtonsTest {
 
     private WebDriver driver;
-    private ForWhoSamokatPage forWhoSamokatPage;
-    private MainPageSamokat mainPageSamokat;
 
 
     // Параметры для теста
@@ -38,9 +37,8 @@ public class OrderSamokatUsingTwoButtonsTest {
     @Before
     public void setUp() {
         driver = new ChromeDriver();
-        mainPageSamokat = new MainPageSamokat(driver);
+        MainPageSamokat mainPageSamokat = new MainPageSamokat(driver);
         mainPageSamokat.openSamokatURL();
-
     }
 
     @Parameterized.Parameters
@@ -54,8 +52,9 @@ public class OrderSamokatUsingTwoButtonsTest {
     @Test
     // Оформление заказа с помощью нижней кнопки Заказать
     public void testFillOrderForms1() {
+        MainPageSamokat mainPageSamokat = new MainPageSamokat(driver);
         mainPageSamokat.сlickOrderButtonBottom();
-        forWhoSamokatPage = new ForWhoSamokatPage(driver);
+        ForWhoSamokatPage forWhoSamokatPage = new ForWhoSamokatPage(driver);
         forWhoSamokatPage.inputAllFieldsAndGoNext(name, surname, address, metroStation, phoneNumber);
         forWhoSamokatPage.clickNextButton();
 
@@ -68,8 +67,9 @@ public class OrderSamokatUsingTwoButtonsTest {
     @Test
     // Оформление заказа с помощью верхней кнопки Заказать
     public void testFillOrderForms2() {
+        MainPageSamokat mainPageSamokat = new MainPageSamokat(driver);
         mainPageSamokat.clickOrderButtonTop();
-        forWhoSamokatPage = new ForWhoSamokatPage(driver);
+        ForWhoSamokatPage forWhoSamokatPage = new ForWhoSamokatPage(driver);
         forWhoSamokatPage.inputAllFieldsAndGoNext(name, surname, address, metroStation, phoneNumber);
         forWhoSamokatPage.clickNextButton();
 
