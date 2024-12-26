@@ -37,8 +37,8 @@ public class OrderSamokatUsingTwoButtonsTest {
     @Before
     public void setUp() {
         driver = new ChromeDriver();
-        MainPageSamokat mainPageSamokat = new MainPageSamokat(driver);
-        mainPageSamokat.openSamokatURL();
+        driver.get(MainPageSamokat.SAMOKAT_URL);
+
     }
 
     @Parameterized.Parameters

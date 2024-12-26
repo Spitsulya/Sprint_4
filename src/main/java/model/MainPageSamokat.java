@@ -18,7 +18,7 @@ public class MainPageSamokat {
     // локатор для кнопки куки
     private By cookieButton = By.xpath(".//button[@id='rcc-confirm-button']");
     // константа URL
-    private static final String SAMOKAT_URL = "https://qa-scooter.praktikum-services.ru/";
+    public static final String SAMOKAT_URL = "https://qa-scooter.praktikum-services.ru/";
 
     // ЛОКАТОРЫ ВОПРОСОВ (1-8)
     public static final By COST_AND_HOW_TO_PAY_QUESTION_ABOUT = By.xpath(".//div[@id='accordion__heading-0']");
