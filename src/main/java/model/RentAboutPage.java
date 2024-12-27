@@ -11,8 +11,6 @@ import static org.junit.Assert.assertTrue;
 public class RentAboutPage {
     private WebDriver driver;
     private static final By STATUS_BUTTON_LOCATOR = By.xpath(".//button[text()='Посмотреть статус']");
-    // константа URL
-    private static final String SAMOKAT_URL = "https://qa-scooter.praktikum-services.ru/";
 
     // локатор для поля Когда привезти самокат
     private By inputDataWhen = By.xpath(".//input[@placeholder='* Когда привезти самокат']");
@@ -42,10 +40,6 @@ public class RentAboutPage {
         this.driver = driver;
     }
 
-    // Открывает сайт Самокат
-    public void openSamokatURL() {
-        driver.get(SAMOKAT_URL);
-    }
     // метод для заполнения поля Когда
     public void setDataWhen(String dataWhen) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // 10 секунд ожидания, пока не появится страница

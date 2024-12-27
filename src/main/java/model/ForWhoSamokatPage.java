@@ -6,8 +6,6 @@ import org.openqa.selenium.WebDriver;
 public class ForWhoSamokatPage {
     private WebDriver driver;
 
-    // константа URL
-    private static final String SAMOKAT_URL = "https://qa-scooter.praktikum-services.ru/";
     // локатор для поля Имя
     private By inputName = By.xpath(".//input[@placeholder='* Имя']");
     // локатор для поля Фамилия
@@ -29,10 +27,6 @@ public class ForWhoSamokatPage {
         this.driver = driver;
     }
 
-    // Открывает сайт Самокат
-    public void openSamokatURL() {
-        driver.get(SAMOKAT_URL);
-    }
     // метод для заполнения поля Имя
     public void setName(String name) {
         driver.findElement(inputName).sendKeys(name);
