@@ -30,8 +30,6 @@ public class OrderSamokatUsingTwoButtonsTest {
     @Parameterized.Parameter(4)
     public String phoneNumber;
     @Parameterized.Parameter(5)
-    public String dataWhen;
-    @Parameterized.Parameter(6)
     public String comment;
 
     @Before
@@ -44,8 +42,8 @@ public class OrderSamokatUsingTwoButtonsTest {
     @Parameterized.Parameters
     public static Collection<Object[]> loginFor() {
         return Arrays.asList(new Object[][]{
-                {"Элина", "Спицына", "г. Домодедово", "Арбатская", "+79854707022", "25.12.2024", "ВАУ"},
-                {"Руслан", "Тимонин", "г. Домодедово", "Домодедовская", "+79852146729", "25.12.2024", "ВАУ"}
+                {"Элина", "Спицына", "г. Домодедово", "Арбатская", "+79854707022", "ВАУ"},
+                {"Руслан", "Тимонин", "г. Домодедово", "Домодедовская", "+79852146729", "ВАУ"}
         });
     }
 
@@ -59,7 +57,7 @@ public class OrderSamokatUsingTwoButtonsTest {
         forWhoSamokatPage.clickNextButton();
 
         RentAboutPage rentAboutPage = new RentAboutPage(driver);
-        rentAboutPage.inputAllFieldsAndOrder(dataWhen, comment);
+        rentAboutPage.inputAllFieldsAndOrder(comment);
 
         rentAboutPage.verifyPageHasStatusButton(); // Проверка наличия кнопки с помощью assert
     }
@@ -74,7 +72,7 @@ public class OrderSamokatUsingTwoButtonsTest {
         forWhoSamokatPage.clickNextButton();
 
         RentAboutPage rentAboutPage = new RentAboutPage(driver);
-        rentAboutPage.inputAllFieldsAndOrder(dataWhen, comment);
+        rentAboutPage.inputAllFieldsAndOrder(comment);
 
         rentAboutPage.verifyPageHasStatusButton(); // Проверка наличия кнопки с помощью assert
     }

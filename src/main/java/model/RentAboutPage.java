@@ -14,6 +14,10 @@ public class RentAboutPage {
 
     // локатор для поля Когда привезти самокат
     private By inputDataWhen = By.xpath(".//input[@placeholder='* Когда привезти самокат']");
+    // локатор, переключающий на следующий месяц
+    private By dataNextMonth = (By.xpath(".//button[text()='Next Month']"));
+    // локатор даты 15-го числа
+    private By dataFifteenth = (By.xpath(".//*[text()='15']"));
     // локатор для поля Срок аренды
     private By inputHowLong = By.xpath(".//div[text()='* Срок аренды']");
     // локатор для поля Цвет самоката черный
@@ -41,11 +45,12 @@ public class RentAboutPage {
     }
 
     // метод для заполнения поля Когда
-    public void setDataWhen(String dataWhen) {
+    public void setDataWhen() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // 10 секунд ожидания, пока не появится страница
         wait.until(ExpectedConditions.visibilityOfElementLocated(backButton));
-        driver.findElement(inputDataWhen).sendKeys(dataWhen);
-        driver.findElement(By.xpath(".//div[@id='root']/div")).click();
+        driver.findElement(inputDataWhen).click();
+        driver.findElement(dataNextMonth).click();
+        driver.findElement(dataFifteenth).click();
     }
     // метод для заполнения поля Срок аренды
     public void setHowlong() {
@@ -73,8 +78,8 @@ public class RentAboutPage {
 
 
     // метод для заполнения всех полей и оформления заказа
-    public void inputAllFieldsAndOrder(String dataWhen, String comment) {
-        setDataWhen(dataWhen);
+    public void inputAllFieldsAndOrder( String comment) {
+        setDataWhen();
         setHowlong();
         setSamokatColor();
         setComment(comment);
