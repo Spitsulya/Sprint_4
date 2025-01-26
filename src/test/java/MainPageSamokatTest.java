@@ -43,15 +43,16 @@ public MainPageSamokatTest(int indexQ, int indexA, String expectedAnswerText) {
         driver = new ChromeDriver();
 
         MainPageSamokat mainPageSamokat = new MainPageSamokat(driver);
-        mainPageSamokat.openSamokatURL(); // переходим на страницу Самокат
-
-        mainPageSamokat.closeCookie(); // закрываем всплывающие куки
-        mainPageSamokat.scrollToQuestions(indexQ); // скроллим до нужного вопроса
-
-
-        mainPageSamokat.сlickQuestions(indexQ); // раскрываем нужный вопрос
-        mainPageSamokat.getAnswerByIndex(indexA); // находим нужный ответ
-
+        // переходим на страницу Самокат
+        mainPageSamokat.openSamokatURL();
+        // закрываем всплывающие куки
+        mainPageSamokat.closeCookie();
+        // скроллим до нужного вопроса
+        mainPageSamokat.scrollToQuestions(indexQ);
+        // раскрываем нужный вопрос
+        mainPageSamokat.сlickQuestions(indexQ);
+        // находим нужный ответ
+        mainPageSamokat.getAnswerByIndex(indexA);
         // получаем фактический текст ответа в переменную actualResultTest и сравниваем ее с ожидаемой expectedAnswerText
         String actualResultText = mainPageSamokat.getTextAnswerAbout(indexA);
         assertEquals("Текст не соответствует", expectedAnswerText, actualResultText);

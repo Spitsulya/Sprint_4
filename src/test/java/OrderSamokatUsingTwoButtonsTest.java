@@ -58,8 +58,8 @@ public class OrderSamokatUsingTwoButtonsTest {
 
         RentAboutPage rentAboutPage = new RentAboutPage(driver);
         rentAboutPage.inputAllFieldsAndOrder(comment);
-
-        rentAboutPage.verifyPageHasStatusButton(); // Проверка наличия кнопки с помощью assert
+        // Проверка наличия кнопки с помощью assert
+        rentAboutPage.verifyPageHasStatusButton();
     }
 
     @Test
@@ -73,8 +73,8 @@ public class OrderSamokatUsingTwoButtonsTest {
 
         RentAboutPage rentAboutPage = new RentAboutPage(driver);
         rentAboutPage.inputAllFieldsAndOrder(comment);
-
-        rentAboutPage.verifyPageHasStatusButton(); // Проверка наличия кнопки с помощью assert
+        // Проверка наличия кнопки с помощью assert
+        rentAboutPage.verifyPageHasStatusButton();
     }
 
 
