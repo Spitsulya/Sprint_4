@@ -2,10 +2,10 @@ package model;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
-
 
 // КЛАСС ГЛАВНОЙ СТРАНИЦЫ САЙТА САМОКАТ
 public class MainPageSamokat {
@@ -19,26 +19,10 @@ public class MainPageSamokat {
     private By cookieButton = By.xpath(".//button[@id='rcc-confirm-button']");
     // константа URL
     public static final String SAMOKAT_URL = "https://qa-scooter.praktikum-services.ru/";
-
-    // ЛОКАТОРЫ ВОПРОСОВ (1-8)
-    public static final By COST_AND_HOW_TO_PAY_QUESTION_ABOUT = By.xpath(".//div[@id='accordion__heading-0']");
-    public static final By QUANTITY_QUESTION_ABOUT = By.xpath(".//div[@id='accordion__heading-1']");
-    public static final By TIME_RENT_QUESTION_ABOUT = By.xpath(".//div[@id='accordion__heading-2']");
-    public static final By RENT_TODAY_QUESTION_ABOUT = By.xpath(".//div[@id='accordion__heading-3']");
-    public static final By RETURN_OR_RENEWAL_QUESTION_ABOUT = By.xpath(".//div[@id='accordion__heading-4']");
-    public static final By CHARGER_QUESTION_ABOUT = By.xpath(".//div[@id='accordion__heading-5']");
-    public static final By CANCELLATION_QUESTION_ABOUT = By.xpath(".//div[@id='accordion__heading-6']");
-    public static final By OUTSIDE_MKAD_QUESTION_ABOUT = By.xpath(".//div[@id='accordion__heading-7']");
-
-    // ЛОКАТОРЫ ОТВЕТОВ (1-8)
-    public static final By COST_AND_HOW_TO_PAY_ANSWER = By.xpath(".//div[@id='accordion__panel-0']/p");
-    public static final By QUANTITY_QUESTION_ABOUT_ANSWER = By.xpath(".//div[@id='accordion__panel-1']/p");
-    public static final By TIME_RENT_QUESTION_ABOUT_ANSWER = By.xpath(".//div[@id='accordion__panel-2']/p");
-    public static final By RENT_TODAY_QUESTION_ABOUT_ANSWER = By.xpath(".//div[@id='accordion__panel-3']/p");
-    public static final By RETURN_OR_RENEWAL_QUESTION_ABOUT_ANSWER = By.xpath(".//div[@id='accordion__panel-4']/p");
-    public static final By CHARGER_QUESTION_ABOUT_ANSWER = By.xpath(".//div[@id='accordion__panel-5']/p");
-    public static final By CANCELLATION_QUESTION_ABOUT_ANSWER = By.xpath(".//div[@id='accordion__panel-6']/p");
-    public static final By OUTSIDE_MKAD_QUESTION_ABOUT_ANSWER = By.xpath(".//div[@id='accordion__panel-7']/p");
+    // Переменная-локатор для всех вопросов
+    private static final String ALL_QUESTIONS_ABOUT = (".//div[@id='accordion__heading-%d']");
+    // Переменная-локатор для всех ответов
+    private static final String ALL_ANSWERS_ABOUT = ("//div[@id='accordion__panel-%d']/p");
 
     // ОЖИДАЕМЫЕ ТЕКСТЫ ОТВЕТОВ (1-8)
     public static final String EXPECTED_TEXT_FIRST = "Сутки — 400 рублей. Оплата курьеру — наличными или картой.";
@@ -63,31 +47,34 @@ public class MainPageSamokat {
     public void closeCookie () {
         driver.findElement(cookieButton).click();
     }
+    // Находит каждый вопрос по его индексу (0-8)
+    public WebElement getQuestionByIndex(int indexQ) {
+        By locator = By.xpath(String.format(ALL_QUESTIONS_ABOUT, indexQ));
+        return driver.findElement(locator);
+    }
+    // Находит каждый ответ по его индексу (0-8)
+    public WebElement getAnswerByIndex(int indexA) {
+        By locator = By.xpath(String.format(ALL_ANSWERS_ABOUT, indexA));
+        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOfElementLocated(locator));
+        return driver.findElement(locator);
+    }
     // Скроллит до конкретного вопроса из рубрики "Вопросы о важном"
-    public void scrollToQuestions(By expectedQuestion) {
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", driver.findElement(expectedQuestion));
+    public void scrollToQuestions(int index) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", getQuestionByIndex(index));
     }
     // Раскрывает каждый вопрос
-    public void сlickQuestions(By expectedQuestion) {
-        driver.findElement(expectedQuestion).click();
-    }
-    // Находит каждый ответ
-    public void getAnswerAbout(By expectedAnswer) {
-        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOfElementLocated(expectedAnswer));
-        driver.findElement(expectedAnswer);
+    public void сlickQuestions(int index) {
+        getQuestionByIndex(index).click();
     }
     // Возвращает фактический текст ответа
-    public String getTextAnswerAbout(By expectedAnswer) {
-       return driver.findElement(expectedAnswer).getText();
+    public String getTextAnswerAbout(int indexA) {
+       return getAnswerByIndex(indexA).getText();
     }
-
-
-
-    // кликнуть по верхней кнопке заказать
+    // Кликает по верхней кнопке заказать
     public void clickOrderButtonTop() {
         driver.findElement(orderButtonTop).click();
     }
-    // кликнуть по нижней кнопке заказать
+    // Кликает по нижней кнопке заказать
     public void сlickOrderButtonBottom() {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", driver.findElement(orderButtonBottom));
         driver.findElement(orderButtonBottom).click();

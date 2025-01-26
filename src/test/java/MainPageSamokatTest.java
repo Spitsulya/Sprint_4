@@ -13,28 +13,28 @@ import static model.MainPageSamokat.*;
 @RunWith(Parameterized.class)
 public class MainPageSamokatTest {
 
-    private final By expectedQuestion;
-    private final By expectedAnswer;
-    private final String expectedAnswerText;
+    private final int indexQ; // индекс вопроса
+    private final int indexA; // индекс ответа
+    private final String expectedAnswerText; // ожидаемый текст ответа
 
     private WebDriver driver;
 
-public MainPageSamokatTest(By expectedQuestion, By expectedAnswer, String expectedAnswerText) {
-    this.expectedQuestion = expectedQuestion;
-    this.expectedAnswer = expectedAnswer;
+public MainPageSamokatTest(int indexQ, int indexA, String expectedAnswerText) {
+    this.indexQ = indexQ;
+    this.indexA = indexA;
     this.expectedAnswerText = expectedAnswerText;
 }
     @Parameterized.Parameters
     public static Object[][] getLocators() {
     return new Object[][] {
-            {COST_AND_HOW_TO_PAY_QUESTION_ABOUT, COST_AND_HOW_TO_PAY_ANSWER, EXPECTED_TEXT_FIRST},
-            {QUANTITY_QUESTION_ABOUT, QUANTITY_QUESTION_ABOUT_ANSWER, EXPECTED_TEXT_SECOND},
-            {TIME_RENT_QUESTION_ABOUT, TIME_RENT_QUESTION_ABOUT_ANSWER, EXPECTED_TEXT_THIRD},
-            {RENT_TODAY_QUESTION_ABOUT, RENT_TODAY_QUESTION_ABOUT_ANSWER, EXPECTED_TEXT_FORTH},
-            {RETURN_OR_RENEWAL_QUESTION_ABOUT, RETURN_OR_RENEWAL_QUESTION_ABOUT_ANSWER, EXPECTED_TEXT_FIFTH},
-            {CHARGER_QUESTION_ABOUT, CHARGER_QUESTION_ABOUT_ANSWER, EXPECTED_TEXT_SIXTH},
-            {CANCELLATION_QUESTION_ABOUT, CANCELLATION_QUESTION_ABOUT_ANSWER, EXPECTED_TEXT_SEVENTH},
-            {OUTSIDE_MKAD_QUESTION_ABOUT, OUTSIDE_MKAD_QUESTION_ABOUT_ANSWER, EXPECTED_TEXT_EIGHTH},
+            {0, 0, EXPECTED_TEXT_FIRST},
+            {1, 1, EXPECTED_TEXT_SECOND},
+            {2, 2, EXPECTED_TEXT_THIRD},
+            {3, 3, EXPECTED_TEXT_FORTH},
+            {4, 4, EXPECTED_TEXT_FIFTH},
+            {5, 5, EXPECTED_TEXT_SIXTH},
+            {6, 6, EXPECTED_TEXT_SEVENTH},
+            {7, 7, EXPECTED_TEXT_EIGHTH},
     };
     }
 
@@ -46,14 +46,14 @@ public MainPageSamokatTest(By expectedQuestion, By expectedAnswer, String expect
         mainPageSamokat.openSamokatURL(); // переходим на страницу Самокат
 
         mainPageSamokat.closeCookie(); // закрываем всплывающие куки
-        mainPageSamokat.scrollToQuestions(expectedQuestion); // скроллим до нужного вопроса
+        mainPageSamokat.scrollToQuestions(indexQ); // скроллим до нужного вопроса
 
 
-        mainPageSamokat.сlickQuestions(expectedQuestion); // раскрываем нужный вопрос
-        mainPageSamokat.getAnswerAbout(expectedAnswer); // находим нужный ответ
+        mainPageSamokat.сlickQuestions(indexQ); // раскрываем нужный вопрос
+        mainPageSamokat.getAnswerByIndex(indexA); // находим нужный ответ
 
         // получаем фактический текст ответа в переменную actualResultTest и сравниваем ее с ожидаемой expectedAnswerText
-        String actualResultText = mainPageSamokat.getTextAnswerAbout(expectedAnswer);
+        String actualResultText = mainPageSamokat.getTextAnswerAbout(indexA);
         assertEquals("Текст не соответствует", expectedAnswerText, actualResultText);
     }
 
