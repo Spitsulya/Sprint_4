@@ -14,7 +14,7 @@ public class ForWhoSamokatPage {
     private By inputAddress = By.xpath(".//input[@placeholder='* Адрес: куда привезти заказ']");
     // локатор для поля Станция метро
     private By inputMetroStation = By.xpath(".//input[@placeholder='* Станция метро']");
-    // докатор для выбора станции метро из выпадающего списка
+    // локатор для выбора станции метро из выпадающего списка
     private By dropDownMetroStation = By.xpath(".//div[@class='select-search__select']");
     // локатор для поля Телефон
     private By inputPhoneNumber = By.xpath(".//input[@placeholder='* Телефон: на него позвонит курьер']");

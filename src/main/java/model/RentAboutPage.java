@@ -27,7 +27,6 @@ public class RentAboutPage {
     // локатор для поля Срок аренды: сутки
     private By oneDayRent = By.xpath(".//div[text()='сутки']");
 
-
     // локатор для поля Комментарий
     private By inputComment = By.xpath(".//input[@placeholder='Комментарий для курьера']");
 
